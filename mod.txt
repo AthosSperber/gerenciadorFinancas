@@ -1,0 +1,15 @@
+Projeto: Gerenciador de Finanças com Visualização de Dados e Reconhecimento de Recibos
+Mod 1: Gerenciador de Finanças Pessoais
+Configurar o ambiente de desenvolvimento (Django).
+Criar o modelo de dados para transações financeiras.
+Desenvolver a interface para adicionar transações (receitas/despesas).
+Implementar a exibição de transações e saldo total.
+Mod 2: Visualização de Dados
+Implementar gráficos para visualização de despesas e receitas.
+Integrar gráficos na interface.
+Mod 3: Web Scraping
+Coletar dados financeiros externos (como cotações).
+Exibir esses dados no painel do usuário.
+Mod 4: Reconhecimento de Imagens
+Implementar reconhecimento de texto (OCR) para recibos.
+Integrar dados extraídos no sistema de finanças.
