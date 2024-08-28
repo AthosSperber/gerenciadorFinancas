@@ -56,6 +56,22 @@ table tr:hover {
     background-color: #c82333;
 }
 
+/* Saldo Total */
+.saldo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.saldo h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+.saldo h2:before {
+    content: "R$ ";
+    color: #666;
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
     .container {
