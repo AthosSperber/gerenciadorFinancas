@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Transações</title>
+    <title>Listagem de Transações</title>
 </head>
 <body>
     <h1>Lista de Transações</h1>
     <a href="{% url 'transacao_create' %}">Adicionar Transação</a>
-    <ul>
-        {% for transacao in transacoes %}
-        <li>{{ transacao.descricao }} - {{ transacao.tipo }} - {{ transacao.valor }} - {{ transacao.data }}</li>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transacao in transacoes %}
+            <tr>
+                <td>{{ transacao.data }}</td>
+                <td>{{ transacao.descricao }}</td>
+                <td>{{ transacao.valor }}</td>
+                <td>
+                    <a href="{% url 'transacao_delete' transacao.pk %}">Excluir</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

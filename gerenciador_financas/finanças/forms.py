@@ -4,4 +4,7 @@ from .models import Transacao
 class TransacaoForm(forms.ModelForm):
     class Meta:
         model = Transacao
-        fields = ['tipo', 'valor', 'data', 'categoria', 'descricao']
+        fields = ['descricao', 'valor', 'tipo', 'data']
+        widgets = {
+            'data': forms.DateInput(attrs={'type': 'date'}),
+        }
