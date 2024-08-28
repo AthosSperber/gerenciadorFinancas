@@ -2,10 +2,17 @@
 <html>
 <head>
     <title>Home - Gerenciador de Finanças</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 </head>
 <body>
-    <h1>Bem-vindo ao Gerenciador de Finanças</h1>
-    <p><a href="{% url 'transacoes_list' %}">Ver Transações</a></p>
-    <p><a href="{% url 'transacao_create' %}">Adicionar Transação</a></p>
+    <h1>Gerenciador de Finanças</h1>
+    <main>
+        <div class="content">
+            <p><a href="{% url 'transacoes_list' %}">Ver Transações</a></p>
+            <p><a href="{% url 'transacao_create' %}">Adicionar Transação</a></p>
+        </div>
+    </main>
 </body>
 </html>

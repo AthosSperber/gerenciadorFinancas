@@ -1,0 +1,43 @@
+/* home.css */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Deixa espaço para o header */
+    flex-direction: column;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #0056b3;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    a {
+        padding: 8px 16px;
+        margin: 8px;
+    }
+}

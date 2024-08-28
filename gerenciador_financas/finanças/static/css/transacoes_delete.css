@@ -1,0 +1,51 @@
+/* transacoes_delete.css */
+
+/* Estilo do formulário de exclusão */
+form {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+form p {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+form button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+form button:hover {
+    background-color: #c82333;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    form {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    form button {
+        padding: 8px;
+        font-size: 14px;
+    }
+}

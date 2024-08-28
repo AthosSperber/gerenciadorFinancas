@@ -1,0 +1,79 @@
+/* transacoes_list.css */
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+table th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+table tr:hover {
+    background-color: #ddd;
+}
+
+.R {
+    background-color: #d4edda !important;
+}
+
+.D {
+    background-color: #f8d7da !important;
+}
+
+.R td {
+    color: #155724;
+}
+
+.D td {
+    color: #721c24;
+}
+
+.btn-excluir {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-excluir:hover {
+    background-color: #c82333;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    table th, table td {
+        padding: 6px;
+    }
+
+    .btn-excluir {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}

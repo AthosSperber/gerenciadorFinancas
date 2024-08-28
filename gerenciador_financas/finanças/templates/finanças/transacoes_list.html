@@ -2,31 +2,45 @@
 <html>
 <head>
     <title>Listagem de Transações</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/transacoes_list.css' %}">
 </head>
 <body>
-    <h1>Lista de Transações</h1>
-    <a href="{% url 'transacao_create' %}">Adicionar Transação</a>
-    <table>
-        <thead>
-            <tr>
-                <th>Data</th>
-                <th>Descrição</th>
-                <th>Valor</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for transacao in transacoes %}
-            <tr>
-                <td>{{ transacao.data }}</td>
-                <td>{{ transacao.descricao }}</td>
-                <td>{{ transacao.valor }}</td>
-                <td>
-                    <a href="{% url 'transacao_delete' transacao.pk %}">Excluir</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <header>
+        <h1>Lista de Transações</h1>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'transacao_create' %}">Adicionar Transação</a>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Tipo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transacao in transacoes %}
+                    <tr class="{{ transacao.tipo }}">
+                        <td>{{ transacao.data }}</td>
+                        <td>{{ transacao.descricao }}</td>
+                        <td>{{ transacao.valor }}</td>
+                        <td>{{ transacao.tipo }}</td>
+                        <td>
+                            <a class="btn-excluir" href="{% url 'transacao_delete' transacao.pk %}">Excluir</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 </html>
