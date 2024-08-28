@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transações</title>
+</head>
+<body>
+    <h1>Lista de Transações</h1>
+    <a href="{% url 'transacao_create' %}">Adicionar Transação</a>
+    <ul>
+        {% for transacao in transacoes %}
+        <li>{{ transacao.descricao }} - {{ transacao.tipo }} - {{ transacao.valor }} - {{ transacao.data }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
