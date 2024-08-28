@@ -4,7 +4,11 @@ from .forms import TransacaoForm
 
 def transacoes_list(request):
     transacoes = Transacao.objects.all()
-    return render(request, 'finanças/transacoes_list.html', {'transacoes': transacoes})
+    saldo = sum([t.valor if t.tipo == 'R' else -t.valor for t in transacoes])
+    return render(request, 'finanças/transacoes_list.html', {
+        'transacoes': transacoes,
+        'saldo': saldo,
+        })
 
 def transacao_create(request):
     if request.method == 'POST':
