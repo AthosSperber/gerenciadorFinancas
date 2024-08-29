@@ -1,4 +1,4 @@
-import plotly.graph_objs as go
+from plotly import graph_objs as go
 from plotly.offline import plot
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Transacao
@@ -11,7 +11,14 @@ def transacoes_list(request):
     receitas = sum(t.valor for t in transacoes if t.tipo == 'R')
     despesas = sum(t.valor for t in transacoes if t.tipo == 'D')
 
-    fig = go.Figure(data=[go.Bar(x=['Receitas', 'Despesas'], y=[receitas, despesas], marker_color=['green', 'red'])])
+    fig = go.Figure(data=[go.Bar(x=['Receitas', 'Despesas'], y=[receitas, despesas], marker_color=['green', 'red'], width = 0.25)])
+    fig.update_layout(
+        width = 800,
+        title = 'Receitas vs Despesas',
+        xaxis_title= 'Categorias',
+        yaxis_title = 'Valores',
+        autosize = True,
+    )
     graphic = plot(fig, output_type='div')
 
     return render(request, 'finanças/transacoes_list.html', {

@@ -17,7 +17,7 @@
     <section class="saldo">
         <h2>Saldo Total: R$ {{ saldo }}</h2>
         <main>
-            <div class="container">
+            <div class="tabela-container">
                 <table>
                     <thead>
                         <tr>
@@ -44,9 +44,11 @@
                 </table>
             </div>
         </main>
+    </section>
+    <section class="grafico">
         <h2>Distribuição das Receitas</h2>
-        <div id="grafico">
-            {{ graphics|safe }}
+        <div class="grafico-container">
+            {{ graphics|safe }}      
         </div>
     </section>
 </body>
