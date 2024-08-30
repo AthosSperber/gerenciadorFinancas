@@ -57,7 +57,12 @@ def transacao_delete(request, pk):
 def cotacao_view(request):
     tickers = Ticker.objects.all()
     cotacoes = {ticker.nome: get_price(ticker.nome) for ticker in tickers}
-    return render(request, 'finanças/cotacao.html', {'cotacoes': cotacoes})
+
+    transacoes = Transacao.objects.all()
+    saldo = sum([t.valor if t.tipo == 'R' else -t.valor for t in transacoes])
+    return render(request, 'finanças/cotacao.html', {
+        'cotacoes': cotacoes,
+        'saldo': saldo})
 
 def adicionar_ticker(request):
     if request.method == 'POST':

@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotações</title>
+    <title>Listagem de Transações</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
 </head>
-<body>
-    <h1>Cotações</h1>
-    
+    <body>
+        <header>
+            <h1>Lista de Transações</h1>
+            <nav>
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'transacoes_list' %}">Ver Transações</a>
+            </nav>
+        </header>
+    <section class="saldo">
+        <h2>Saldo Total: R$ {{ saldo }}</h2>
+    </section>
     <form method="post" action="{% url 'adicionar_ticker' %}">
         {% csrf_token %}
         <input type="text" name="ticker" placeholder="Digite o ticker">
