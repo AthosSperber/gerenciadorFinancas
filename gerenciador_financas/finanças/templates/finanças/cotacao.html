@@ -3,10 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotação</title>
+    <title>Cotações</title>
 </head>
 <body>
-    <h1>Cotação de {{ ticker }}</h1>
-    <p>Preço atual: ${{ preco }}</p>
+    <h1>Cotações</h1>
+    
+    <form method="post" action="{% url 'adicionar_ticker' %}">
+        {% csrf_token %}
+        <input type="text" name="ticker" placeholder="Digite o ticker">
+        <button type="submit">Adicionar Ticker</button>
+    </form>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Ticker</th>
+                <th>Preço Atual</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticker, preco in cotacoes.items %}
+                <tr>
+                    <td>{{ ticker }}</td>
+                    <td>${{ preco }}</td>
+                    <td>
+                        <form method="post" action="{% url 'excluir_ticker' ticker_nome=ticker %}">
+                            {% csrf_token %}
+                            <button type="submit">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

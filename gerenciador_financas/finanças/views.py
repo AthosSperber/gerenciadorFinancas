@@ -1,7 +1,7 @@
 from plotly import graph_objs as go
 from plotly.offline import plot
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Transacao
+from .models import Transacao, Ticker
 from .forms import TransacaoForm
 from .cotacao import get_price
 
@@ -55,6 +55,18 @@ def transacao_delete(request, pk):
 
 
 def cotacao_view(request):
-    ticker = "AAPL"  # Por exemplo, Apple
-    preco = get_price(ticker)
-    return render(request, 'finanças/cotacao.html', {'ticker': ticker, 'preco': preco})
+    tickers = Ticker.objects.all()
+    cotacoes = {ticker.nome: get_price(ticker.nome) for ticker in tickers}
+    return render(request, 'finanças/cotacao.html', {'cotacoes': cotacoes})
+
+def adicionar_ticker(request):
+    if request.method == 'POST':
+        ticker_nome = request.POST.get('ticker').upper()
+        if ticker_nome:
+            Ticker.objects.get_or_create(nome=ticker_nome)
+    return redirect('cotacao')
+
+def excluir_ticker(request, ticker_nome):
+    ticker = get_object_or_404(Ticker, nome=ticker_nome)
+    ticker.delete()
+    return redirect('cotacao')

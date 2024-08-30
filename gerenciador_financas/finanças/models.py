@@ -14,4 +14,10 @@ class Transacao(models.Model):
     def __str__(self):
         return f'{self.tipo} - {self.valor}'
 
+class Ticker(models.Model):
+    nome = models.CharField(max_length=10, unique=True)
+
+    def __str__(self):
+        return self.nome
+    
 # Create your models here.
