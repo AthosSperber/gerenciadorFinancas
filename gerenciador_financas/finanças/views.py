@@ -3,6 +3,7 @@ from plotly.offline import plot
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Transacao
 from .forms import TransacaoForm
+from .cotacao import get_price
 
 def transacoes_list(request):
     transacoes = Transacao.objects.all()
@@ -11,7 +12,12 @@ def transacoes_list(request):
     receitas = sum(t.valor for t in transacoes if t.tipo == 'R')
     despesas = sum(t.valor for t in transacoes if t.tipo == 'D')
 
-    fig = go.Figure(data=[go.Bar(x=['Receitas', 'Despesas'], y=[receitas, despesas], marker_color=['green', 'red'], width = 0.25)])
+    fig = go.Figure(data=[go.Bar(
+        x=['Receitas', 'Despesas'], 
+        y=[receitas, despesas], 
+        marker_color=['green', 'red'], 
+        width = 0.25)])
+    
     fig.update_layout(
         width = 800,
         title = 'Receitas vs Despesas',
@@ -46,3 +52,9 @@ def transacao_delete(request, pk):
         transacao.delete()
         return redirect('transacoes_list')
     return render(request, 'finanças/transacoes_delete.html', {'transacao': transacao})
+
+
+def cotacao_view(request):
+    ticker = "AAPL"  # Por exemplo, Apple
+    preco = get_price(ticker)
+    return render(request, 'finanças/cotacao.html', {'ticker': ticker, 'preco': preco})
