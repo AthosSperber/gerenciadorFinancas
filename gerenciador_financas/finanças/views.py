@@ -86,12 +86,12 @@ def upload_recibo(request):
             imagem = request.FILES['imagem']
             dados = extrair_dados_recibo(imagem)
             
-            # criação automática da transação
+            # Criação automática da transação usando o tipo extraído
             Transacao.objects.create(
                 valor=dados['valor'],
                 data=dados['data'],
                 descricao=dados['descricao'],
-                tipo='Despesa' if float(dados['valor']) < 0 else 'Receita'
+                tipo=dados['tipo']
             )
             return redirect('transacoes_list')
     else:
