@@ -12,3 +12,4 @@ class TransacaoForm(forms.ModelForm):
 
 class UploadReciboForm(forms.Form):
     imagem = forms.ImageField()
+    descricao = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Descrição (opcional)'}))

@@ -24,7 +24,14 @@
         {% endif %}
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
+            <div>
+                <label for="{{ form.imagem.id_for_label }}">Imagem:</label>
+                {{ form.imagem }}
+            </div>
+            <div>
+                <label for="{{ form.descricao.id_for_label }}">Descrição (opcional):</label>
+                {{ form.descricao }}
+            </div>
             <button type="submit">Enviar Recibo</button>
         </form>
     </main>

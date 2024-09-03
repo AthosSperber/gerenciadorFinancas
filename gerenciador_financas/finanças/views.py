@@ -85,12 +85,15 @@ def upload_recibo(request):
         if form.is_valid():
             imagem = request.FILES['imagem']
             dados = extrair_dados_recibo(imagem)
+
+            descricao_usuario = form.cleaned_data.get('descricao', '').strip()
+            descricao = descricao_usuario if descricao_usuario else dados['descricao']
             
             # Criação automática da transação usando o tipo extraído
             Transacao.objects.create(
                 valor=dados['valor'],
                 data=dados['data'],
-                descricao=dados['descricao'],
+                descricao = descricao,
                 tipo=dados['tipo']
             )
             return redirect('transacoes_list')
