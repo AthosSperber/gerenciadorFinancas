@@ -36,7 +36,7 @@ def extrair_dados_recibo(imagem_caminho):
 
     linhas = texto.split('\n')
     for linha in linhas:
-        # Identificar se é um boleto ou recibo
+        # Identificar se é um boleto ou recibo (pensando em tirar o boleto)
         if any(keyword in linha.lower() for keyword in ['boleto', 'vencimento', 'cedente', 'agência']):
             descricao = 'Boleto'
             tipo = 'D'
