@@ -24,41 +24,59 @@ def get_price(ticker):
         return "Preço não encontrado"
 
 
+
 def extrair_dados_recibo(imagem_caminho):
     imagem = Image.open(imagem_caminho)
     texto = pytesseract.image_to_string(imagem)
-    
+
     valor = None
     data = None
     tipo = 'D'  # Definição padrão para despesa
+    descricao = 'Recibo/Boleto'
 
     linhas = texto.split('\n')
     for linha in linhas:
-        if 'Valor' in linha:
-            valor = linha.split(':')[-1].strip()
-            valor = re.sub(r'[^\d,.-]', '', valor).replace(',', '.')
-            if valor:
+        # Identificar se é um boleto ou recibo
+        if any(keyword in linha.lower() for keyword in ['boleto', 'vencimento', 'cedente', 'agência']):
+            descricao = 'Boleto'
+            tipo = 'D'
+        elif any(keyword in linha.lower() for keyword in ['recibo', 'recebido de', 'importância de']):
+            descricao = 'Recibo'
+            tipo = 'R'
+
+        # Extrair valor
+        if any(keyword in linha.lower() for keyword in ['valor documento', 'total', 'quantia', 'valor']):
+            valor_match = re.search(r'(\d{1,3}(?:\.\d{3})*,\d{2})|(\d+,\d{2})', linha)
+            if valor_match:
+                valor = valor_match.group(0).replace('.', '').replace(',', '.')
                 try:
                     valor = float(valor)
                 except ValueError:
-                    valor = None
-        
-        if 'Recebido' in linha or 'Crédito' in linha or 'Receita' in linha or 'Recibo' in linha:
-            tipo = 'R'  # Se encontrar palavras que indicam receita
-        
-        if 'Data' in linha:
-            data = linha.split(':')[-1].strip()
-            try:
-                data = datetime.strptime(data, '%d/%m/%Y').date()
-            except ValueError:
-                data = None
+                    valor = 0.0
 
+        # Extrair data
+        if any(keyword in linha.lower() for keyword in ['data', 'vencimento']):
+            data_match = re.search(r'(\d{2}/\d{2}/\d{4})|(\d{2}-\d{2}-\d{4})', linha)
+            if data_match:
+                try:
+                    data = datetime.strptime(data_match.group(0), '%d/%m/%Y').date()
+                except ValueError:
+                    try:
+                        data = datetime.strptime(data_match.group(0), '%d-%m-%Y').date()
+                    except ValueError:
+                        data = None
+
+    # Caso não encontre uma data específica
     if data is None:
         data = datetime.now().date()
 
+    # Caso não encontre um valor específico
+    if valor is None:
+        valor = 0.0
+
     return {
-        'valor': valor if valor is not None else 0.0,
+        'valor': valor,
         'data': data,
-        'descricao': 'Recibo/Boleto',
+        'descricao': descricao,
         'tipo': tipo
     }
