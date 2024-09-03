@@ -31,7 +31,7 @@ def extrair_dados_recibo(imagem_caminho):
 
     valor = None
     data = None
-    tipo = 'D'  # Definição padrão para despesa
+    tipo = 'R'  # Definição padrão para despesa
     descricao = 'Recibo/Boleto'
 
     linhas = texto.split('\n')
@@ -45,7 +45,7 @@ def extrair_dados_recibo(imagem_caminho):
             tipo = 'R'
 
         # Extrair valor
-        if any(keyword in linha.lower() for keyword in ['valor documento', 'total', 'quantia', 'valor']):
+        if any(keyword in linha.lower() for keyword in ['r$', 'valor documento', 'total', 'quantia', 'valor']):
             valor_match = re.search(r'(\d{1,3}(?:\.\d{3})*,\d{2})|(\d+,\d{2})', linha)
             if valor_match:
                 valor = valor_match.group(0).replace('.', '').replace(',', '.')
