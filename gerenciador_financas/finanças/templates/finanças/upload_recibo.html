@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de Recibo</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/upload_recibo.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Upload de Recibo</h1>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'transacoes_list' %}">Transações</a>
+        </nav>
+    </header>
+    <main>
+        {% if erro %}
+            <div class="erro">
+                <p>{{ erro }}</p>
+            </div>
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Enviar Recibo</button>
+        </form>
+    </main>
+</body>
+</html>

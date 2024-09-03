@@ -9,4 +9,5 @@ urlpatterns = [
     path('cotacao/', views.cotacao_view, name='cotacao'),
     path('adicionar_ticker/', views.adicionar_ticker, name='adicionar_ticker'),
     path('excluir_ticker/<str:ticker_nome>/', views.excluir_ticker, name='excluir_ticker'),
+    path('upload_recibo/', views.upload_recibo, name='upload_recibo'),
 ]

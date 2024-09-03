@@ -11,5 +11,5 @@ Mod 3: Web Scraping
 Coletar dados financeiros externos (como cotações).
 Exibir esses dados no painel do usuário.
 Mod 4: Reconhecimento de Imagens
-Implementar reconhecimento de texto (OCR) para recibos.
+Implementar reconhecimento de texto (OCR) para recibos. https://github.com/UB-Mannheim/tesseract/wiki
 Integrar dados extraídos no sistema de finanças.
