@@ -1,48 +1,63 @@
-form {
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.form-container {
     max-width: 600px;
-    margin: auto;
+    width: 100%;
     background: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
-form label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-form p {
+.form-container p {
     margin-bottom: 20px;
     font-size: 16px;
 }
 
-form button {
+form button, .cancel-button {
     background-color: #dc3545;
     color: #fff;
     border: none;
     cursor: pointer;
-    padding: 10px;
+    padding: 10px 20px;
     border-radius: 4px;
     font-size: 16px;
     font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
 }
 
-form button:hover {
+form button:hover, .cancel-button:hover {
     background-color: #c82333;
+}
+
+/* Botão de cancelar */
+.cancel-button {
+    background-color: #007bff;
+    margin-left: 10px;
+}
+
+.cancel-button:hover {
+    background-color: #0056b3;
 }
 
 /* Media Queries */
 @media (max-width: 768px) {
-    form {
+    .form-container {
         padding: 15px;
     }
 }
 
 @media (max-width: 480px) {
-    form button {
-        padding: 8px;
+    form button, .cancel-button {
+        padding: 8px 15px;
         font-size: 14px;
     }
 }
