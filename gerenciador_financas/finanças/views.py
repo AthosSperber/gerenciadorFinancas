@@ -3,9 +3,9 @@ from PIL import Image
 from plotly import graph_objs as go
 from plotly.offline import plot
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Transacao, Ticker, Recibo
-from .forms import TransacaoForm, ReciboForm
-from .cotacao import get_price
+from .models import Transacao, Ticker
+from .forms import TransacaoForm, UploadReciboForm
+from .utils import get_price, extrair_dados_recibo
 
 def transacoes_list(request):
     transacoes = Transacao.objects.all()
@@ -81,57 +81,19 @@ def excluir_ticker(request, ticker_nome):
 
 def upload_recibo(request):
     if request.method == 'POST':
-        form = ReciboForm(request.POST, request.FILES)
+        form = UploadReciboForm(request.POST, request.FILES)
         if form.is_valid():
-            recibo = form.save()
-            texto_extraido = extrair_texto_recibo(recibo.imagem.path)
-            dados_transacao = parse_texto_para_transacao(texto_extraido)
-            if dados_transacao:
-                transacao = Transacao.objects.create(**dados_transacao)
-                recibo.transacao = transacao
-                recibo.save()
-                return redirect('transacoes_list')
-            else:
-                context = {
-                    'form': form,
-                    'erro': 'Não foi possível extrair informações válidas do recibo.'
-                }
-                return render(request, 'finanças/upload_recibo.html', context)
+            imagem = request.FILES['imagem']
+            dados = extrair_dados_recibo(imagem)
+            
+            # criação automática da transação
+            Transacao.objects.create(
+                valor=dados['valor'],
+                data=dados['data'],
+                descricao=dados['descricao'],
+                tipo='Despesa' if float(dados['valor']) < 0 else 'Receita'
+            )
+            return redirect('transacoes_list')
     else:
-        form = ReciboForm()
-    return render(request, 'finanças/upload_recibo.html', {'form': form})
-
-def extrair_texto_recibo(caminho_imagem):
-    imagem = Image.open(caminho_imagem)
-    texto = pytesseract.image_to_string(imagem, lang='por')
-    return texto
-
-def parse_texto_para_transacao(texto):
-    # Implementação simples usando expressões regulares
-    import re
-    resultado = {}
-    # Extrair valor
-    valor_match = re.search(r'R\$\s?(\d+,\d{2})', texto)
-    if valor_match:
-        valor = valor_match.group(1).replace('.', '').replace(',', '.')
-        resultado['valor'] = float(valor)
-    else:
-        return None
-    # Extrair data
-    data_match = re.search(r'Data[:\-]\s?(\d{2}/\d{2}/\d{4})', texto)
-    if data_match:
-        from datetime import datetime
-        data_str = data_match.group(1)
-        resultado['data'] = datetime.strptime(data_str, '%d/%m/%Y').date()
-    else:
-        return None
-    # Extrair descrição
-    descricao_match = re.search(r'Descrição[:\-]\s?(.*)', texto)
-    if descricao_match:
-        resultado['descricao'] = descricao_match.group(1).strip()
-    else:
-        resultado['descricao'] = 'Recibo sem descrição'
-    # Definir tipo e categoria (pode ser aprimorado conforme necessidade)
-    resultado['tipo'] = 'D'  # Assumindo que recibos são despesas
-    resultado['categoria'] = 'Outros'
-    return resultado
+        form = UploadReciboForm()
+    return render(request, 'upload_recibo.html', {'form': form})

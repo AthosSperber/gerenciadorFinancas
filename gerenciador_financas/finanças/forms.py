@@ -1,5 +1,5 @@
 from django import forms
-from .models import Transacao, Recibo
+from .models import Transacao
 
 class TransacaoForm(forms.ModelForm):
     class Meta:
@@ -9,7 +9,6 @@ class TransacaoForm(forms.ModelForm):
             'data': forms.DateInput(attrs={'type': 'date'}),
         }
 
-class ReciboForm(forms.ModelForm):
-    class Meta:
-        model = Recibo
-        fields = ['imagem']
+
+class UploadReciboForm(forms.Form):
+    imagem = forms.ImageField()

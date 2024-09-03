@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 class Transacao(models.Model):
     TIPO_CHOICES = [
@@ -21,12 +20,5 @@ class Ticker(models.Model):
     def __str__(self):
         return self.nome
     
-class Recibo(models.Model):
-    imagem = models.ImageField(upload_to='recibos/')
-    data_upload = models.DateTimeField(auto_now_add=True)
-    transacao = models.ForeignKey(Transacao, on_delete=models.CASCADE, null=True, blank=True)
 
-    def __str__(self):
-        return f'Recibo {self.id}'
-    
 # Create your models here.
