@@ -40,21 +40,27 @@ Este projeto é um **Gerenciador de Finanças Pessoais** desenvolvido com Django
 1. Clone o repositório:
    ```bash
    git clone https://github.com/AthosSperber/gerenciadorFinancas.git
+   ```
 2. Navegue até o diretório do projeto:
    ```bash
     cd gerenciadorFinancas
+   ```
 3. Crie um ambiente virtual (Para evitar conflitos de dependências, é recomendável criar um ambiente virtual):
   ```bash
     python -m venv venv
+  ```
+  ```bash
     source venv/bin/activate  # No Windows, use `venv\Scripts\activate`
   ```
 4. Instale as Dependências:
    ```bash
    pip install -r requirements.txt
-   
+   ```
 5. Realize as migrações e execute o servidor:
   ```bash
 python manage.py migrate
+  ```
+  ```bash
 python manage.py runserver
   ```
 Acesse o aplicativo em http://127.0.0.1:8000 e comece a gerenciar suas finanças!
