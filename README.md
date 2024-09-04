@@ -10,7 +10,7 @@ Este projeto é um **Gerenciador de Finanças Pessoais** desenvolvido com Django
 
 ### 2. Visualização de Dados
 - **Gráficos Interativos**: Visualize suas receitas e despesas através de gráficos interativos.  
-  - **Tecnologia utilizada**: ![#4169e1](https://via.placeholder.com/15/4169e1/000000?text=+) `Matplotlib` e ![#4169e1](https://via.placeholder.com/15/4169e1/000000?text=+) `Seaborn`.
+  - **Tecnologia utilizada**: ![#4169e1](https://via.placeholder.com/15/4169e1/000000?text=+) `Matplotlib` e `Seaborn`.
 
 ### 3. Web Scraping
 - **Coleta de Dados Externos**: Realiza a extração de informações financeiras externas, como cotações de moedas e ações, e exibe esses dados no painel do usuário.
