@@ -46,7 +46,8 @@ Este projeto é um **Gerenciador de Finanças Pessoais** desenvolvido com Django
 3. Crie um ambiente virtual (Para evitar conflitos de dependências, é recomendável criar um ambiente virtual):
   ```bash
     python -m venv venv
-
+  ```
+  ```
     source venv/bin/activate  # No Windows, use `venv\Scripts\activate`
   ```
 4. Instale as Dependências:
